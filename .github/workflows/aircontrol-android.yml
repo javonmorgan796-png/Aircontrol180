@@ -24,7 +24,6 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
-          cache: pnpm
       - name: Accept android-sdk-licenses
         run: |
           yes | sdkmanager --licenses > /dev/null
