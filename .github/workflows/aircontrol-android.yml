@@ -30,7 +30,7 @@ jobs:
       - name: Install Javascript dependencies
         run: |
           cd artifacts/aircontrol
-          pnpm install --frozen-lockfile
+          pnpm install --no-frozen-lockfile
       - name: Assemble installable APK
         run: |
           cd artifacts/aircontrol/android
