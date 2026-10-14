@@ -24,6 +24,7 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
+      - uses: android-actions/setup-android@v3
       - name: Accept android-sdk-licenses
         run: |
           yes | sdkmanager --licenses > /dev/null
@@ -38,4 +39,4 @@ jobs:
         with:
           name: aircontrol-android-apk
           path: artifacts/aircontrol/android/app/build/outputs/apk/release/app-release.apk
-          if-no-files-found: error 
+          if-no-files-found: error
