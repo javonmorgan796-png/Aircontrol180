@@ -33,9 +33,7 @@ jobs:
           pnpm install --frozen-lockfile
       - name: Assemble installable APK
         run: |
-          cd artifacts/aircontrol/android
           ./gradlew clean
-          cd -
           pnpm --filter @workspace/aircontrol run android:assembleRelease
       - uses: actions/upload-artifact@v4
         with:
