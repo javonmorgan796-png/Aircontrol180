@@ -37,6 +37,12 @@ yarn-error.log
 testem.log
 /typings
 
+# AirControl Android build outputs and local SDK configuration
+artifacts/aircontrol/android/.gradle/
+artifacts/aircontrol/android/local.properties
+artifacts/aircontrol/android/build/
+artifacts/aircontrol/android/app/build/
+
 # System Files
 .DS_Store
 Thumbs.db

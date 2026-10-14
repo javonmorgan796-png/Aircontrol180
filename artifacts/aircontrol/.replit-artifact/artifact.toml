@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/aircontrol/"
+title = "AirControl"
+description = "A futuristic Android hand-control companion app with Home, Gestures, and Settings screens, shared React Native UI code, and honest camera-permission handling. Gesture recognition is not included yet."
+version = "1.0.0"
+id = "artifacts/aircontrol"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/aircontrol/" ]
+localPort = 23413
+
+[services.development]
+run = "pnpm --filter @workspace/aircontrol run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/aircontrol", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/aircontrol/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "23413"
+BASE_PATH = "/aircontrol/"
