@@ -4,10 +4,10 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - "artifacts/aircontrol/**"
-      - "pnpm-lock.yaml"
-      - "pnpm-workspace.yaml"
-      - ".github/workflows/aircontrol-android.yml"
+      - 'artifacts/aircontrol/**'
+      - 'pnpm-lock.yaml'
+      - 'pnpm-workspace.yaml'
+      - '.github/workflows/aircontrol-android.yml'
 
 jobs:
   build:
@@ -24,20 +24,20 @@ jobs:
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: "17"
-      - uses: android-actions/setup-android@v4
-        with:
-          accept-android-sdk-licenses: true
-      - name: Install Android build tools
+          java-version: '17'
+          cache: pnpm
+      - name: Accept android-sdk-licenses
         run: |
-          yes | sdkmanager --licenses >/dev/null
-          sdkmanager "platform-tools" "platforms;android-36" "build-tools;36.0.0" "ndk;27.1.12297006"
+          yes | sdkmanager --licenses > /dev/null
+          sdkmanager "platform-tools" "platforms;android-36" "build-tools;36.0.0"
       - name: Install JavaScript dependencies
         run: pnpm install --frozen-lockfile
       - name: Assemble installable APK
-        run: pnpm --filter @workspace/aircontrol run android:assembleRelease
+        run: |
+          ./gradlew clean
+          pnpm --filter @workspace/aircontrol run android:assembleRelease
       - uses: actions/upload-artifact@v4
         with:
           name: aircontrol-android-apk
           path: artifacts/aircontrol/android/app/build/outputs/apk/release/app-release.apk
-          if-no-files-found: error
+          if-no-files-found: error 
