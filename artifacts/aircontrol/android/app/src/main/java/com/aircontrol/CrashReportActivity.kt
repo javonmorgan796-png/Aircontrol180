@@ -1,5 +1,6 @@
 package com.aircontrol
 
+import com.aircontrol.R
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
