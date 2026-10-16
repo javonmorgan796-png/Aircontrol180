@@ -5,8 +5,6 @@ apply plugin: "com.facebook.react"
 react {
     bundleConfig = file("../../metro.config.cjs")
     autolinkLibrariesWithApp()
-    // Ensure the JS bundle is generated and packaged into release APKs on CI
-    bundleInRelease = true
 }
 
 def enableProguardInReleaseBuilds = false
