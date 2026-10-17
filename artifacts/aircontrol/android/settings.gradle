@@ -1,19 +1,31 @@
 pluginManagement {
-    includeBuild("../node_modules/@react-native/gradle-plugin")
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+
+    def reactNativeGradlePlugin = file("../node_modules/@react-native/gradle-plugin")
+
+    if (!reactNativeGradlePlugin.exists()) {
+        throw new GradleException(
+            "React Native Gradle plugin not found at ${reactNativeGradlePlugin}. " +
+            "Make sure pnpm installs the Android dependencies before building."
+        )
+    }
+
+    includeBuild(reactNativeGradlePlugin)
 }
 
 plugins {
     id("com.facebook.react.settings")
 }
 
-extensions.configure(
-    com.facebook.react.ReactSettingsExtension
-) { ex ->
+extensions.configure(com.facebook.react.ReactSettingsExtension) { ex ->
     ex.autolinkLibrariesFromCommand()
 }
 
 rootProject.name = "AirControl"
-
 include(":app")
 
 includeBuild("../node_modules/@react-native/gradle-plugin")
