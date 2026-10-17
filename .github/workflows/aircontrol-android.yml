@@ -47,10 +47,11 @@ jobs:
       - name: Install JavaScript dependencies
         run: pnpm install --no-frozen-lockfile
 
-      - name: Verify Babel runtime
+      - name: Verify React Native dependencies
         working-directory: artifacts/aircontrol
         run: |
-          pnpm why @babel/runtime
+          node -e "console.log('React Native:', require('react-native/package.json').version)"
+          node -e "const fs=require('fs'); const p='node_modules/@react-native/gradle-plugin'; console.log('Gradle plugin exists:', fs.existsSync(p)); if (!fs.existsSync(p)) process.exit(1)"
           node -p "require.resolve('@babel/runtime/helpers/interopRequireDefault')"
 
       - name: Assemble installable APK
