@@ -1,17 +1,19 @@
-def rnPluginDir = file('../node_modules/@react-native/gradle-plugin')
-if (rnPluginDir.exists()) {
-    pluginManagement {
-        includeBuild(rnPluginDir)
-    }
+pluginManagement {
+    includeBuild("../node_modules/@react-native/gradle-plugin")
+}
 
-    plugins { id "com.facebook.react.settings" }
+plugins {
+    id("com.facebook.react.settings")
+}
 
-    extensions.configure(com.facebook.react.ReactSettingsExtension) { ex ->
-        ex.autolinkLibrariesFromCommand()
-    }
-} else {
-    println("Warning: @react-native/gradle-plugin not found at ${rnPluginDir}; skipping plugin include.")
+extensions.configure(
+    com.facebook.react.ReactSettingsExtension
+) { ex ->
+    ex.autolinkLibrariesFromCommand()
 }
 
 rootProject.name = "AirControl"
+
 include(":app")
+
+includeBuild("../node_modules/@react-native/gradle-plugin")
